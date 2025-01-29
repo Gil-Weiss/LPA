@@ -58,15 +58,15 @@ try:
         header = struct.unpack('I'*8, LPFfile.read(32))
         output['header'] = header
         if verbose:
-            print "Header:\n\t%s"%repr(header)
+            print("Header:\n\t%s"%repr(header))
         numPts = header[3]
         timeStep = header[2]
         if verbose:
-            print "Header Data:"
-            print "\tLPF ver: %d"%header[0]
-            print "\tNumber of channels (total): %d"%header[1]
-            print "\tTime step: %d (ms)"%timeStep
-            print "\tNumber of time steps: %d"%numPts
+            print("Header Data:")
+            print("\tLPF ver: %d"%header[0])
+            print("\tNumber of channels (total): %d"%header[1])
+            print("\tTime step: %d (ms)"%timeStep)
+            print("\tNumber of time steps: %d"%numPts)
         if header[1] != rowNum * colNum * channelNum:
             raise IOError("Product of rowNum, colNum, & channelNum (%d) != total channels in the LPF (%d)"%(rowNum*colNum*channelNum, header[1]))
         times = np.arange(0, numPts*timeStep, timeStep)
@@ -78,8 +78,8 @@ try:
                         ints[tp,r,c,ch] = int(struct.unpack('h', LPFfile.read(2))[0])
         LPFfile.close()
         if verbose:
-            print "Intensity Data:"
-            print "\tParsed %d time points (%.2fmin)"%(len(times), times[-1]/1000./60.)
+            print("Intensity Data:")
+            print("\tParsed %d time points (%.2fmin)"%(len(times), times[-1]/1000./60.))
         output['data'] = (times, ints)
         return output
 
@@ -234,6 +234,6 @@ try:
                 plt.savefig(savePath, dpi=150, bbox_inches='tight')
 
     except ImportError:
-        print "Plotting functions disabled; matplotlib not found."
+        print( "Plotting functions disabled; matplotlib not found.")
 except ImportError:
-    print "Numpy package is required."
+    print("Numpy package is required.")
