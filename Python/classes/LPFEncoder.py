@@ -29,7 +29,7 @@ class LPFEncoder():
 		self.gsVals = np.array(gsVals, dtype=np.uint16)
 		# test that the gsVals array has the correct shape
 		gsVshape = np.shape(gsVals)
-		if gsVshape[1]*gsVshape[2]*gsVshape[3] != self.channelNum:
+		if len(gsVshape) != 3 or gsVshape[1] * gsVshape[2] != self.channelNum:
 			raise IOError("gsVals shape must match the deviceParams number of (TOTAL) channels")
 		if self.numSteps != gsVshape[0]:
 			raise IOError("gsVals shape must match the deviceParams number of time points")
